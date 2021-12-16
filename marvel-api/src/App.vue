@@ -18,7 +18,7 @@ export default {
     Cards,
     SearchInput,
     Footer,
-  }
+  },
 }
 </script>
 
