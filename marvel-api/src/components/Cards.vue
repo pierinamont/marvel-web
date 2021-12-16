@@ -1,5 +1,7 @@
 <template>
   <div
+  v-for="character in characters"
+  :key="character.id"
     class="
       bg-white
       shadow-md
@@ -12,7 +14,7 @@
   >
     <img
       class="rounded-t-lg"
-      src="https://flowbite.com/docs/images/blog/image-1.jpg"
+      :src="character.thumbnail.path + '.' +character.thumbnail.extension"
       alt=""
     />
 
@@ -27,26 +29,18 @@
           dark:text-white
         "
       >
-        character
+        {{character.name}}
       </h5>
 
       <p class="text-sm text-gray-700 mb-3">
-        Here are the biggest enterprise technology acquisitions of 2021 so far.
+         {{character.description}}
       </p>
     </div>
   </div>
 </template>
 
 <script>
-// https://gateway.marvel.com:443/v1/public/characters?apikey=5ca0254ca03b0cb4515e99240e79f903
 
-// public key: 5ca0254ca03b0cb4515e99240e79f903
-// private key: a1040b26aba64a020345260eda8e56927141a512
-// ts : 1
-// 1a1040b26aba64a020345260eda8e56927141a5125ca0254ca03b0cb4515e99240e79f903
-
-// 1a1040b26aba64a020345260eda8e56927141a5125ca0254ca03b0cb4515e99240e79f903
-// hash: 28db8be61d0ada711c2c558e79fe9d6e
 import axios from "axios";
 
 export default {
@@ -62,10 +56,11 @@ export default {
     getData() {
       axios
         .get(
-          "http://gateway.marvel.com/v1/public/comics?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
+          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
         )
         .then((res) => {
-          console.log(res.data);
+        this.characters = res.data.data.results;
+        console.log(res.data.data.results);
         })
         .catch((error) => console.log(error));
     },
