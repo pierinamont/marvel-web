@@ -1,8 +1,41 @@
 <template>
-    <div class="flex justify-center items-center">
-        <div class="relative">
-            <div class="absolute top-4 left-3"> <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div> <input type="text" class="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none" placeholder="Search anything...">
-            <div class="absolute top-2 right-2"> <button class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800">Search</button> </div>
-        </div>
+  <div class="flex justify-center items-center">
+    <div class="relative">
+      <div class="absolute top-4 left-3">
+        <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+      </div>
+      <input
+        v-model="search"
+        type="text"
+        class="
+          h-14
+          w-96
+          pl-10
+          pr-20
+          rounded-lg
+          z-0
+          focus:shadow focus:outline-none
+        "
+        placeholder="Search anything..."
+      />
+      <div class="absolute top-2 right-2">
+        <button
+          v-on:keyup.enter="searchData"
+          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800"
+        >
+          Search
+        </button>
+      </div>
     </div>
+  </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            searchInput: "",
+        }
+    },
+}
+</script>

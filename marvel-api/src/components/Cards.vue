@@ -1,4 +1,5 @@
 <template>
+<div class="w-10/12">
   <div
   v-for="character in characters"
   :key="character.id"
@@ -37,6 +38,7 @@
       </p>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -48,9 +50,6 @@ export default {
     return {
       characters: [],
     };
-  },
-   beforeMount(){
-    this.getData();
   },
   methods: {
     getData() {
@@ -64,6 +63,9 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+  },
+  beforeMount(){
+    this.getData();
   },
 };
 </script>
