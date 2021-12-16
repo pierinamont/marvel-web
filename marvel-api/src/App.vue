@@ -1,17 +1,23 @@
 <template>
-  <HelloWorld />
+  <Header />
+  <SearchInput />
   <Cards />
+  <Footer />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import Cards from './components/Cards.vue'
+import Cards from './components/Cards.vue';
+import SearchInput from './components/SearchInput.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Header,
     Cards,
+    SearchInput,
+    Footer,
   }
 }
 </script>
