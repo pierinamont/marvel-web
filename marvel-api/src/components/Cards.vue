@@ -1,8 +1,42 @@
 <template>
-<div class="w-10/12">
+<!-- input -->
+  <section class="flex justify-center items-center">
+    <div class="relative">
+      <div class="absolute top-4 left-3">
+        <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+      </div>
+      <input
+        v-model="search"
+        v-on:keyup.enter="searchName"
+        type="text"
+        class="
+          h-14
+          w-96
+          pl-10
+          pr-20
+          rounded-lg
+          z-0
+          focus:shadow focus:outline-none
+        "
+        placeholder="Search anything..."
+      />
+      <div class="absolute top-2 right-2">
+        <button
+          :click="searchName"
+          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Sección de cards -->
+<section class="w-10/12">
   <div
-  v-for="character in characters"
-  :key="character.id"
+    v-for="character in characters"
+    :key="character.id"
     class="
       bg-white
       shadow-md
@@ -38,21 +72,26 @@
       </p>
     </div>
   </div>
-</div>
+</section>
 </template>
 
 <script>
-
+// https://gateway.marvel.com:443/v1/public/characters/1017100?apikey=
 import axios from "axios";
 
 export default {
   data() {
     return {
       characters: [],
+      search: "",
     };
   },
+  // props: {
+  //   search: ""
+  // },
   methods: {
     getData() {
+      console.log(this.search)
       axios
         .get(
           "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
@@ -63,9 +102,27 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    searchName() {
+       axios
+        .get(
+          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
+        )
+        .then((res) => {
+        // Filtrar por nombre
+        // let names = res.data.data.results.name;
+        // names.filter((n) => n == this.search)
+
+        let allData = res.data.data.results;
+        const names = allData.filter((data) => data.name.toLowerCase().includes(this.search))
+        this.characters = names;
+        })
+        .catch((error) => console.log(error));
+    },
   },
   beforeMount(){
     this.getData();
   },
+  
+
 };
 </script>

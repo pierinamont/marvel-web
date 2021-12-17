@@ -1,13 +1,11 @@
 <template>
   <Header />
-  <SearchInput />
   <Cards />
   <Footer />
 </template>
 
 <script>
 import Cards from './components/Cards.vue';
-import SearchInput from './components/SearchInput.vue'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
@@ -16,7 +14,6 @@ export default {
   components: {
     Header,
     Cards,
-    SearchInput,
     Footer,
   },
 }
