@@ -75,6 +75,9 @@
       <p class="text-sm text-gray-700 mb-3">
          {{character.description}}
       </p>
+      <span class="p-3 text-sm text-white bg-red-600 rounded-md">
+         {{character.modified}}
+      </span>
     </div>
   </div>
 </section>
