@@ -5,7 +5,7 @@
         <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
             <div class="max-w-sm p-6 bg-white divide-y divide-gray-500 rounded-md">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-2xl">{{currentCharacter.name}}</h3>
+                    <h3 class="text-2xl">{{currentCharacter[0].name}}</h3>
                     <svg 
                     @click="modal = false"
                     xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 cursor-pointer" fill="none" viewBox="0 0 24 24"
@@ -17,10 +17,10 @@
                 </div>
                 <div class="mt-4">
                     <p
-                    v-if="currentCharacter.description"
+                    v-if="currentCharacter[0].description"
                     class="mt-4 mb-4 text-sm"
                     >
-                    {{currentCharacter.description}}
+                    {{currentCharacter[0].description}}
                     </p>
                     <p 
                     v-else
@@ -49,7 +49,12 @@ export default {
     props: {
         currentCharacter: {},
         modal: "",
-    } 
+    },
+    // methods: {
+    //     current() {
+    //         console.log(this.currentCharacter)
+    //     }
+    // }
 }
 </script>
 
