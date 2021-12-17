@@ -1,6 +1,9 @@
 <template>
 <!-- input -->
-  <section class="flex justify-center items-center my-10">
+  <section class="flex justify-center items-center my-10 flex-col">
+    <a 
+    @click="getData"
+    class="mb-5 text-red-600 cursor-pointer hover:text-blue-600">See All Characters</a>
     <div class="relative">
       <div class="absolute top-4 left-3">
         <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
