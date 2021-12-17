@@ -27,8 +27,8 @@
       />
       <div class="absolute top-2 right-2">
         <button
-          :click="searchName"
-          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800 text-sm"
+          v-on:click="searchName"
+          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-500 text-sm"
         >
           SEARCH
         </button>
@@ -73,7 +73,8 @@
       </h5>
       <button 
        @click="showmodal(character.id)"
-       class="px-3 py-1 text-sm text-white bg-red-600 rounded-md border-0">
+       class="px-3 py-1 text-sm text-white bg-red-600 rounded-md border-0 hover:bg-red-500"
+       >
          Edit
       </button>
        <p class="text-sm text-gray-700 mb-3">
@@ -86,9 +87,7 @@
   <Character
    class="modal"
    :class="{ 'is-active': modal }"
-   v-for="character of characters"
-   :key="character.id"
-   :character="character"
+   :currentCharacter="currentCharacter"
    :modal="modal"
   />
 </section>
@@ -111,19 +110,15 @@ export default {
       currentCharacter: {},
     };
   },
-  // props: {
-  //   search: ""
-  // },
+
   methods: {
     getData() {
-      console.log(this.search)
       axios
         .get(
           "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
         )
         .then((res) => {
         this.characters = res.data.data.results;
-        console.log(res.data.data.results);
         })
         .catch((error) => console.log(error));
     },
@@ -133,36 +128,39 @@ export default {
           "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
         )
         .then((res) => {
-        // Filtrar por nombre
-        // let names = res.data.data.results.name;
-        // names.filter((n) => n == this.search)
           let allData = res.data.data.results;
 
           if(this.search === '') {
             this.characters = allData;
           } else {
+            // Filtrar por nombre
             const names = allData.filter((data) => data.name.toLowerCase().includes(this.search))
             this.characters = names;
           }
         })
         .catch((error) => console.log(error));
     },
-    async fetchOne(id) {
-        let result = await axios.get(
+
+     fetchOne(id) {
+        axios
+        .get(
         `https://gateway.marvel.com:443/v1/public/characters/${id}?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e`
-        );
-        this.currentCharacter = result.data;
-        // console.log(this.currentCharacter);
-        this.modal = true;
+        )
+        .then((res) => {
+           this.currentCharacter = res.data.data.results;
+           JSON.parse(JSON.stringify(this.currentCharacter))
+          //  console.log(this.currentCharacter)
+           this.modal = true;
+        })
+        .catch((error) => console.log(error));
     },
     showmodal(id) {
       this.fetchOne(id)
     },
+    
   },
   beforeMount(){
     this.getData();
   },
-  
-
 };
 </script>
