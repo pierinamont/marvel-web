@@ -35,7 +35,7 @@
 
 
 <!-- Sección de cards -->
-<section class="w-10/12 flex flex-wrap justify-center m-auto">
+<section class="w-10/12 flex flex-wrap justify-center m-auto gap-10 mb-20">
   <div
     v-for="character in characters"
     :key="character.id"
