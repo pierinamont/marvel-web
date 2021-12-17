@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <Cards />
+    <Cards />
   <Footer />
 </template>
 
@@ -26,5 +26,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 60px; */
+  background-color: rgb(244, 246, 253);
 }
 </style>

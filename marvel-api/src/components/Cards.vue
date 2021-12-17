@@ -1,6 +1,6 @@
 <template>
 <!-- input -->
-  <section class="flex justify-center items-center">
+  <section class="flex justify-center items-center my-10">
     <div class="relative">
       <div class="absolute top-4 left-3">
         <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
@@ -11,21 +11,23 @@
         type="text"
         class="
           h-14
-          w-96
-          pl-10
+          w-64
+          md:w-96
+          pl-6
+          md:pl-10
           pr-20
           rounded-lg
           z-0
           focus:shadow focus:outline-none
         "
-        placeholder="Search anything..."
+        placeholder="search anything..."
       />
       <div class="absolute top-2 right-2">
         <button
           :click="searchName"
-          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800"
+          class="h-10 w-20 text-white rounded-lg bg-red-600 hover:bg-red-800 text-sm"
         >
-          Search
+          SEARCH
         </button>
       </div>
     </div>
@@ -33,7 +35,7 @@
 
 
 <!-- Sección de cards -->
-<section class="w-10/12">
+<section class="w-10/12 flex flex-wrap justify-center m-auto">
   <div
     v-for="character in characters"
     :key="character.id"
@@ -111,10 +113,14 @@ export default {
         // Filtrar por nombre
         // let names = res.data.data.results.name;
         // names.filter((n) => n == this.search)
+          let allData = res.data.data.results;
 
-        let allData = res.data.data.results;
-        const names = allData.filter((data) => data.name.toLowerCase().includes(this.search))
-        this.characters = names;
+          if(this.search === '') {
+            this.characters = allData;
+          } else {
+            const names = allData.filter((data) => data.name.toLowerCase().includes(this.search))
+            this.characters = names;
+          }
         })
         .catch((error) => console.log(error));
     },
