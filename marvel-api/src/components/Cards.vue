@@ -71,27 +71,39 @@
       >
         {{character.name}}
       </h5>
-
-      <p class="text-sm text-gray-700 mb-3">
-         {{character.description}}
+      <button 
+       @click="showModal(character.id)"
+      class="p-3 text-sm text-white bg-red-600 rounded-md border-0">
+         Edit
+      </button>
+       <p class="text-sm text-gray-700 mb-3">
+         Modified: {{character.modified}}
       </p>
-      <span class="p-3 text-sm text-white bg-red-600 rounded-md">
-         {{character.modified}}
-      </span>
     </div>
   </div>
+
+  <!-- MODAL DE PERSONAJE -->
+  <Character
+   class="modal" :class="{ 'is-active': modal }" v-if="modal"
+  />
 </section>
 </template>
 
 <script>
 // https://gateway.marvel.com:443/v1/public/characters/1017100?apikey=
 import axios from "axios";
+import Character from './Character.vue'
 
 export default {
+  components: {
+    Character,
+  },
   data() {
     return {
       characters: [],
       search: "",
+      modal: false,
+      currentCharacter: {},
     };
   },
   // props: {
@@ -129,6 +141,10 @@ export default {
           }
         })
         .catch((error) => console.log(error));
+    },
+    showmodal(id) {
+      this.modal = true;
+      this.$emit('fetchOne', id)
     },
   },
   beforeMount(){
