@@ -73,7 +73,7 @@
       </h5>
       <button 
        @click="showmodal(character.id)"
-      class="p-3 text-sm text-white bg-red-600 rounded-md border-0">
+       class="px-3 py-1 text-sm text-white bg-red-600 rounded-md border-0">
          Edit
       </button>
        <p class="text-sm text-gray-700 mb-3">
@@ -147,16 +147,16 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-    showmodal(id) {
-      this.fetchOne(id)
-    },
     async fetchOne(id) {
         let result = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=5ca0254ca03b0cb4515e99240e79f903`
+        `https://gateway.marvel.com:443/v1/public/characters/${id}?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e`
         );
         this.currentCharacter = result.data;
         // console.log(this.currentCharacter);
         this.modal = true;
+    },
+    showmodal(id) {
+      this.fetchOne(id)
     },
   },
   beforeMount(){
