@@ -72,7 +72,7 @@
         {{character.name}}
       </h5>
       <button 
-       @click="showModal(character.id)"
+       @click="showmodal(character.id)"
       class="p-3 text-sm text-white bg-red-600 rounded-md border-0">
          Edit
       </button>
@@ -82,9 +82,14 @@
     </div>
   </div>
 
-  <!-- MODAL DE PERSONAJE -->
+  <!-- MODAL DE PERSONAJES -->
   <Character
-   class="modal" :class="{ 'is-active': modal }" v-if="modal"
+   class="modal"
+   :class="{ 'is-active': modal }"
+   v-for="character of characters"
+   :key="character.id"
+   :character="character"
+   :modal="modal"
   />
 </section>
 </template>
@@ -143,8 +148,15 @@ export default {
         .catch((error) => console.log(error));
     },
     showmodal(id) {
-      this.modal = true;
-      this.$emit('fetchOne', id)
+      this.fetchOne(id)
+    },
+    async fetchOne(id) {
+        let result = await axios.get(
+        `https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=5ca0254ca03b0cb4515e99240e79f903`
+        );
+        this.currentCharacter = result.data;
+        // console.log(this.currentCharacter);
+        this.modal = true;
     },
   },
   beforeMount(){

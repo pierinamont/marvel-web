@@ -1,7 +1,9 @@
 <template>
-  <div class="container flex justify-center mx-auto">
-    <button class="px-6 py-2 text-white bg-blue-600 rounded shadow-xl" type="button">open
-        model</button>
+  <div 
+  v-if="modal"
+  class="container flex justify-center mx-auto">
+    <button class="px-6 py-2 text-white bg-blue-600 rounded shadow-xl" type="button">
+        open model</button>
     <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
         <div class="max-w-sm p-6 bg-white divide-y divide-gray-500">
             <div class="flex items-center justify-between">
@@ -30,25 +32,12 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
-props: ["character"],
-  methods: {
-    // showMore(id) {
-    //   this.$emit("showmodal", id);
-    // }
-        // Tendra la tarea de desplegar modal y de traerse la data de los personajes
-    async fetchOne(id) {
-        let result = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=5ca0254ca03b0cb4515e99240e79f903`
-        );
-        this.currentCharacter = result.data;
-        // console.log(this.currentCharacter);
-        this.modal = true;
-    },
-  },
-  
+    props: {
+        character: {},
+        modal: "",
+    } 
 }
 </script>
 
