@@ -75,10 +75,12 @@
        @click="showmodal(character.id)"
        class="px-3 py-1 text-sm text-white bg-red-600 rounded-md border-0 hover:bg-red-500"
        >
-         Description
+         More Info
       </button>
        <p class="text-sm text-gray-700 mb-3">
-         Modified: {{character.modified}}
+         Modified:
+         {{new Date(character.modified).toDateString()}}
+        
       </p>
     </div>
   </div>
