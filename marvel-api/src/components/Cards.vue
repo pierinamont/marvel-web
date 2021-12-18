@@ -141,7 +141,7 @@ export default {
     getData() {
       axios
         .get(
-          `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100`
+          `https://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100`
         )
         .then((res) => {
         this.characters = res.data.data.results;
@@ -154,7 +154,7 @@ export default {
     searchName() {
        axios
         .get(
-          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100"
+          "https://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100"
         )
         .then((res) => {
           let allData = res.data.data.results;
@@ -173,7 +173,7 @@ export default {
      fetchOne(id) {
         axios
         .get(
-        `http://gateway.marvel.com:443/v1/public/characters/${id}?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e`
+        `https://gateway.marvel.com:443/v1/public/characters/${id}?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e`
         )
         .then((res) => {
            this.currentCharacter = res.data.data.results;
