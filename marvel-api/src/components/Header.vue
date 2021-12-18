@@ -14,7 +14,7 @@
 
             </a>
             <div class="lg:w-2/5 inline-flex lg:justify-end ml-0 md:ml-5 lg:ml-0">
-                <a href="https://www.buymeacoffee.com/pazlydev" class="bg-indigo-700 hover:bg-indigo-500 text-white ml-0 md:ml-4 py-2 px-3 rounded-lg text-sm">
+                <a class="bg-indigo-700 hover:bg-indigo-500 text-white ml-0 md:ml-4 py-2 px-3 rounded-lg text-sm">
                     SUSCRIBE
                 </a>
             </div>
