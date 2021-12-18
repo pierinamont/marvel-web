@@ -1,19 +1,14 @@
 # marvel-api
 
-## Project setup
-```
-npm install
-```
+[![marvelresponsive.png](https://i.postimg.cc/NjpB5Pvg/marvelresponsive.png)](https://postimg.cc/tsZLckgf)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Web responsive que permite visualizar data de los personajes de marvel.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Tecnologías usadas
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Vue.js
+- Javascript
+- Tailwind
+
+## Preview
+[![preview.png](https://i.postimg.cc/RC2DTrzP/preview.png)](https://postimg.cc/K4rfZHjL)
