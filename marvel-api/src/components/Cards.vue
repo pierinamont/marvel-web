@@ -39,6 +39,7 @@
 
 <!-- Sección de cards -->
 <section class="w-10/12 flex flex-wrap justify-center m-auto gap-10 mb-20">
+<div v-if="!characters.length" class="loading">Loading...</div>
   <div
     v-for="character in characters"
     :key="character.id"
@@ -106,6 +107,7 @@ export default {
   },
   data() {
     return {
+      bottom: false,
       characters: [],
       search: "",
       modal: false,
@@ -113,21 +115,46 @@ export default {
     };
   },
 
+  watch: {
+    bottom(newValue) {
+      if (newValue) {
+        this.getData();
+      }
+    }
+  },
+  created() {
+    window.addEventListener("scroll", () => {
+      this.bottom = this.bottomVisible();
+    });
+    this.getData();
+  },
+  
   methods: {
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
+    
     getData() {
       axios
         .get(
-          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
+          `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100`
         )
         .then((res) => {
         this.characters = res.data.data.results;
+        if (this.bottomVisible()) {
+          this.getData();
+        }
         })
         .catch((error) => console.log(error));
     },
     searchName() {
        axios
         .get(
-          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e"
+          "http://gateway.marvel.com/v1/public/characters?ts=1&apikey=5ca0254ca03b0cb4515e99240e79f903&hash=28db8be61d0ada711c2c558e79fe9d6e&limit=100&offset=100"
         )
         .then((res) => {
           let allData = res.data.data.results;
@@ -159,10 +186,14 @@ export default {
     showmodal(id) {
       this.fetchOne(id)
     },
-    
-  },
-  beforeMount(){
-    this.getData();
   },
 };
 </script>
+
+<style scoped>
+.loading {
+  color: rgb(235, 27, 27);
+  text-align: center;
+  font-size: 20px;
+}
+</style>

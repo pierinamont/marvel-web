@@ -1,7 +1,7 @@
 <template>
     <div 
     v-if="modal"
-    class="container flex justify-center mx-auto">
+    class="flex justify-center mx-auto h-max">
         <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
             <div class="max-w-sm p-6 bg-white divide-y divide-gray-500 rounded-md">
                 <div class="flex items-center justify-between">
