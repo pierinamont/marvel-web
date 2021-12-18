@@ -50,11 +50,6 @@ export default {
         currentCharacter: {},
         modal: "",
     },
-    // methods: {
-    //     current() {
-    //         console.log(this.currentCharacter)
-    //     }
-    // }
 }
 </script>
 
